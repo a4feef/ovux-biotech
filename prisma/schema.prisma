@@ -1,0 +1,125 @@
+// Prisma schema for Ovux Biotech Solutions
+// Database: SQLite (can be changed to PostgreSQL for production)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// User model for authentication and role-based access
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String    // Hashed with bcrypt
+  name          String
+  role          String    @default("STAFF") // ADMIN or STAFF
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  lastLoginAt   DateTime?
+  lastLoginIp   String?
+  
+  // Relations
+  auditLogs     AuditLog[]
+  rfqUpdates    RFQ[]     @relation("RFQUpdatedBy")
+  
+  @@index([email])
+  @@index([role])
+}
+
+// RFQ (Request for Quote) model
+model RFQ {
+  id                String      @id @default(cuid())
+  name              String
+  company           String
+  email             String
+  country           String
+  productCategory   String
+  productDescription String
+  quantity          String?
+  frequency         String?
+  requiredCerts     String?
+  message           String?
+  status            String      @default("NEW") // NEW, IN_REVIEW, QUOTED, CLOSED
+  
+  // Tracking
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  updatedBy         String?
+  updatedByUser     User?       @relation("RFQUpdatedBy", fields: [updatedBy], references: [id])
+  
+  @@index([status])
+  @@index([createdAt])
+  @@index([country])
+  @@index([productCategory])
+}
+
+// Product model
+model Product {
+  id              String    @id @default(cuid())
+  name            String
+  description     String
+  categoryId      String
+  category        Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  imageUrl        String?
+  isVisible       Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  @@index([categoryId])
+  @@index([isVisible])
+}
+
+// Category model
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String
+  imageUrl    String?
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  // Relations
+  products    Product[]
+  
+  @@index([slug])
+  @@index([order])
+}
+
+// Audit Log model for tracking all admin actions
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  action    String   // e.g., "LOGIN", "RFQ_UPDATE", "PRODUCT_CREATE"
+  entityType String? // e.g., "RFQ", "Product", "User"
+  entityId  String?
+  details   String?  // JSON string with additional details
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
+  @@index([entityType, entityId])
+}
+
+// Product view tracking for analytics
+model ProductView {
+  id        String   @id @default(cuid())
+  productId String
+  viewedAt  DateTime @default(now())
+  ipAddress String?
+  userAgent String?
+  
+  @@index([productId])
+  @@index([viewedAt])
+}
+

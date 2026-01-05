@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("postgresql://postgres:Mopster@21@db.vibexkduqvflcicvcpjc.supabase.co:5432/postgres")
+  url      = env("DATABASE_URL")
 }
 
 // User model for authentication and role-based access

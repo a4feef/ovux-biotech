@@ -82,3 +82,4 @@ npm run db:seed
 
 Your Ovux Biotech Solutions website is ready to use!
 
+

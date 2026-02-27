@@ -4,29 +4,18 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
 
-// Logo component with fallback
+// Logo: small icon + "Ovux Biotech Solutions" text (no large logo image)
 function LogoWithFallback() {
-  const [logoError, setLogoError] = useState(false)
   const [iconError, setIconError] = useState(false)
-
-  // If both images fail, show text
-  if (logoError && iconError) {
-    return (
-      <span className="text-xl md:text-2xl font-bold text-primary-600">
-        <span className="md:hidden">OVUX</span>
-        <span className="hidden md:inline">Ovux Biotech Solutions</span>
-      </span>
-    )
-  }
 
   return (
     <>
-      {/* Logo Icon - always try to show */}
+      {/* Small logo icon */}
       {!iconError && (
         <div className="relative h-10 w-10 md:h-12 md:w-12 flex-shrink-0">
           <Image
             src="/logo/ovux-icon.png"
-            alt="OVUX"
+            alt=""
             width={48}
             height={48}
             className="object-contain"
@@ -35,27 +24,11 @@ function LogoWithFallback() {
           />
         </div>
       )}
-      {/* Full Logo - desktop only */}
-      {!logoError && (
-        <div className="relative h-8 w-32 md:h-10 md:w-40 hidden md:block">
-          <Image
-            src="/logo/ovux-logo.png"
-            alt="OVUX Biotech Solutions"
-            width={160}
-            height={40}
-            className="object-contain"
-            priority
-            onError={() => setLogoError(true)}
-          />
-        </div>
-      )}
-      {/* Fallback text - shows on mobile or if logo fails */}
-      {(logoError || iconError) && (
-        <span className="text-xl md:text-2xl font-bold text-primary-600">
-          <span className="md:hidden">OVUX</span>
-          <span className="hidden md:inline">Ovux Biotech Solutions</span>
-        </span>
-      )}
+      {/* Text beside the logo */}
+      <span className="text-xl md:text-2xl font-bold text-primary-600 whitespace-nowrap">
+        <span className="md:hidden">OVUX</span>
+        <span className="hidden md:inline">Ovux Biotech Solutions</span>
+      </span>
     </>
   )
 }

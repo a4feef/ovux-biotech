@@ -71,3 +71,4 @@ For Vercel/serverless, use Supabase's connection pooler:
 
 The connection string format will be different - Supabase will show you the correct one.
 
+

@@ -2,6 +2,7 @@
 
 import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 interface AdminHeaderProps {
   user: {
@@ -22,7 +23,18 @@ export default function AdminHeader({ user }: AdminHeaderProps) {
   return (
     <header className="bg-white shadow-sm border-b">
       <div className="px-8 py-4 flex justify-between items-center">
-        <div>
+        <div className="flex items-center space-x-3">
+          <div className="relative h-8 w-8">
+            <Image
+              src="/logo/ovux-icon.png"
+              alt="OVUX"
+              fill
+              className="object-contain"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none'
+              }}
+            />
+          </div>
           <h1 className="text-2xl font-bold text-gray-900">Ovux Biotech Admin</h1>
         </div>
         <div className="flex items-center space-x-4">

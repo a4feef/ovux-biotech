@@ -28,5 +28,16 @@
   .card {
     @apply bg-white rounded-lg shadow-md p-6;
   }
+  
+  /* Logo fallback - hide text if logo image exists */
+  .logo-fallback {
+    display: block;
+  }
+  
+  /* Hide fallback if logo images are loaded */
+  nav img[src*="ovux-logo"]:not([style*="display: none"]) ~ .logo-fallback,
+  nav img[src*="ovux-icon"]:not([style*="display: none"]) ~ .logo-fallback {
+    display: none;
+  }
 }
 

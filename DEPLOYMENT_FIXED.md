@@ -73,3 +73,4 @@ Then commit and push - Vercel will apply it automatically.
 
 Just commit and push the migration files!
 
+

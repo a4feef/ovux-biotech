@@ -35,19 +35,6 @@ export default function ChromatographyPage() {
           awareness of OEM restrictions and regulatory requirements.
         </p>
 
-        <h2 className="text-2xl font-bold mt-8 mb-4">Understanding OEM Restrictions</h2>
-        <div className="bg-yellow-50 border-l-4 border-yellow-600 p-6 mb-6">
-          <p className="text-gray-700 mb-4">
-            <strong>Important Notice:</strong> Ovux Biotech Solutions is not an authorized distributor 
-            or OEM partner of any chromatography equipment manufacturer (including but not limited to 
-            Agilent, Waters, Thermo Fisher, Shimadzu, or other OEMs).
-          </p>
-          <p className="text-gray-700">
-            We respect OEM restrictions and focus on providing compatible and alternative solutions 
-            that meet your analytical requirements while operating within legal and regulatory frameworks.
-          </p>
-        </div>
-
         <h2 className="text-2xl font-bold mt-8 mb-4">Compliant Alternatives</h2>
         <p className="text-gray-700 mb-4">
           We work with suppliers who provide:

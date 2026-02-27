@@ -76,3 +76,4 @@ Once `DATABASE_URL` is set in Vercel:
 2. Your website will connect to the database
 3. You may need to run migrations: `npx prisma migrate deploy` (or use Vercel CLI)
 
+

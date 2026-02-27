@@ -216,7 +216,7 @@ export default function ContactPage() {
         <div className="text-center">
           <h3 className="font-semibold mb-2">Email</h3>
           <a href="mailto:mdenam@ovuxbiotech.com" className="text-primary-600 hover:text-primary-700">
-            info@ovuxbiotech.com
+            mdenam@ovuxbiotech.com
           </a>
         </div>
         <div className="text-center">

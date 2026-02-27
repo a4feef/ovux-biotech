@@ -40,13 +40,17 @@ export default function AboutPage() {
         <h2 className="text-2xl font-bold mt-8 mb-4">Compliance Statement</h2>
         <div className="bg-primary-50 border-l-4 border-primary-600 p-6 mb-6">
           <p className="text-gray-700 mb-4">
-            <strong>Important:</strong> Ovux Biotech Solutions is a global sourcing company.
+            <strong>Important:</strong> Ovux Biotech Solutions is a global sourcing company. We do not 
+            claim to be an authorized distributor or OEM partner of any specific manufacturer. Our 
+            services focus on providing compatible and alternative solutions while respecting OEM 
+            restrictions and regulatory requirements.
           </p>
           <p className="text-gray-700">
-            We work within the bounds of applicable laws and regulations, and we encourage our clients
-            to verify all product specifications, certifications, and regulatory compliance for their
+            We work within the bounds of applicable laws and regulations, and we encourage our clients 
+            to verify all product specifications, certifications, and regulatory compliance for their 
             specific use cases and jurisdictions.
           </p>
+          
         </div>
 
         <h2 className="text-2xl font-bold mt-8 mb-4">Our Expertise</h2>

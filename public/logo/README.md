@@ -49,5 +49,3 @@ The logo will be used in:
 - SVG is preferred for scalability
 - Keep file sizes small for fast loading
 - Test on both light and dark backgrounds
-
-

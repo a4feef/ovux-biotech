@@ -34,5 +34,3 @@ Based on your logo design:
 3. Check browser tab - icon should appear
 
 The code is already set up to use your logo!
-
-

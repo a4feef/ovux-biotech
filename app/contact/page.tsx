@@ -215,7 +215,7 @@ export default function ContactPage() {
       <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="text-center">
           <h3 className="font-semibold mb-2">Email</h3>
-          <a href="mailto:info@ovuxbiotech.com" className="text-primary-600 hover:text-primary-700">
+          <a href="mailto:mdenam@ovuxbiotech.com" className="text-primary-600 hover:text-primary-700">
             info@ovuxbiotech.com
           </a>
         </div>

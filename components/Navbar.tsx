@@ -1,7 +1,64 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
+
+// Logo component with fallback
+function LogoWithFallback() {
+  const [logoError, setLogoError] = useState(false)
+  const [iconError, setIconError] = useState(false)
+
+  // If both images fail, show text
+  if (logoError && iconError) {
+    return (
+      <span className="text-xl md:text-2xl font-bold text-primary-600">
+        <span className="md:hidden">OVUX</span>
+        <span className="hidden md:inline">Ovux Biotech Solutions</span>
+      </span>
+    )
+  }
+
+  return (
+    <>
+      {/* Logo Icon - always try to show */}
+      {!iconError && (
+        <div className="relative h-10 w-10 md:h-12 md:w-12 flex-shrink-0">
+          <Image
+            src="/logo/ovux-icon.png"
+            alt="OVUX"
+            width={48}
+            height={48}
+            className="object-contain"
+            priority
+            onError={() => setIconError(true)}
+          />
+        </div>
+      )}
+      {/* Full Logo - desktop only */}
+      {!logoError && (
+        <div className="relative h-8 w-32 md:h-10 md:w-40 hidden md:block">
+          <Image
+            src="/logo/ovux-logo.png"
+            alt="OVUX Biotech Solutions"
+            width={160}
+            height={40}
+            className="object-contain"
+            priority
+            onError={() => setLogoError(true)}
+          />
+        </div>
+      )}
+      {/* Fallback text - shows on mobile or if logo fails */}
+      {(logoError || iconError) && (
+        <span className="text-xl md:text-2xl font-bold text-primary-600">
+          <span className="md:hidden">OVUX</span>
+          <span className="hidden md:inline">Ovux Biotech Solutions</span>
+        </span>
+      )}
+    </>
+  )
+}
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -11,8 +68,9 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold text-primary-600">
-              Ovux Biotech Solutions
+            <Link href="/" className="flex items-center space-x-2 md:space-x-3 hover:opacity-80 transition-opacity">
+              {/* Try to load logo, fallback to text if not found */}
+              <LogoWithFallback />
             </Link>
           </div>
 

@@ -61,6 +61,12 @@ export default function Navbar() {
             <Link href="/chromatography" className="text-gray-700 hover:text-primary-600 transition-colors">
               Chromatography
             </Link>
+			<Link href="/services" className="text-gray-700 hover:text-primary-600 transition-colors">
+			Services
+			</Link>
+			<Link href="/ebook" className="text-gray-700 hover:text-primary-600 transition-colors">
+			Ebook
+			</Link>
             <Link href="/services" className="text-gray-700 hover:text-primary-600 transition-colors">
               Services
             </Link>
@@ -99,6 +105,12 @@ export default function Navbar() {
             <Link href="/products" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded">
               Products
             </Link>
+			<Link href="/services" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded">
+			Services
+			</Link>
+			<Link href="/ebook" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded">
+			Ebook
+			</Link>
             <Link href="/chromatography" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded">
               Chromatography
             </Link>

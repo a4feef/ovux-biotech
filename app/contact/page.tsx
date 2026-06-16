@@ -39,7 +39,13 @@ export default function ContactPage() {
         body: JSON.stringify({ ...data, cfToken: turnstileToken }),
       })
 
-      if (!response.ok) throw new Error('Failed to submit RFQ')
+      const json = await response.json().catch(() => null)
+
+      if (!response.ok) {
+        const reason = json?.error || `Server error (${response.status})`
+        setSubmitStatus({ type: 'error', message: reason })
+        return
+      }
 
       setSubmitStatus({
         type: 'success',
@@ -48,10 +54,11 @@ export default function ContactPage() {
       reset()
       setTurnstileToken(null)
       turnstileRef.current?.reset()
-    } catch {
+    } catch (err) {
+      console.error('RFQ submit error:', err)
       setSubmitStatus({
         type: 'error',
-        message: 'Submission failed. Please try again or email us directly at connect@ovuxbiotech.com.',
+        message: 'Could not reach the server. Check your connection and try again.',
       })
     } finally {
       setIsSubmitting(false)

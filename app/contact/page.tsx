@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { rfqSchema, type RFQFormData } from '@/lib/validation'
 import { Mail, MapPin, Clock, ShieldCheck } from 'lucide-react'
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
 
 const contactDetails = [
   { icon: Mail, label: 'Email', value: 'connect@ovuxbiotech.com', href: 'mailto:connect@ovuxbiotech.com' },
@@ -15,6 +16,8 @@ const contactDetails = [
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
+  const turnstileRef = useRef<TurnstileInstance>(null)
 
   const {
     register,
@@ -26,6 +29,11 @@ export default function ContactPage() {
   })
 
   const onSubmit = async (data: RFQFormData) => {
+    if (!turnstileToken) {
+      setSubmitStatus({ type: 'error', message: 'Please wait for the security check to complete.' })
+      return
+    }
+
     setIsSubmitting(true)
     setSubmitStatus(null)
 
@@ -33,7 +41,7 @@ export default function ContactPage() {
       const response = await fetch('/api/rfq', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, cfToken: turnstileToken }),
       })
 
       if (!response.ok) throw new Error('Failed to submit RFQ')
@@ -43,6 +51,8 @@ export default function ContactPage() {
         message: 'Your request has been received. Our team will respond within 24 hours.',
       })
       reset()
+      setTurnstileToken(null)
+      turnstileRef.current?.reset()
     } catch {
       setSubmitStatus({
         type: 'error',
@@ -227,9 +237,17 @@ export default function ContactPage() {
                   </div>
 
                   <div className="pt-2">
+                    <Turnstile
+                      ref={turnstileRef}
+                      siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+                      onSuccess={(token) => setTurnstileToken(token)}
+                      onExpire={() => setTurnstileToken(null)}
+                      onError={() => setTurnstileToken(null)}
+                      className="mb-4"
+                    />
                     <button
                       type="submit"
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || !turnstileToken}
                       className="btn-primary w-full justify-center disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? 'Submitting...' : 'Submit Quote Request'}

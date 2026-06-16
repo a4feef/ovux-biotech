@@ -20,8 +20,23 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json()
 
+    // Verify Cloudflare Turnstile token
+    const { cfToken, ...formData } = body
+    if (!cfToken) {
+      return NextResponse.json({ error: 'Security check required.' }, { status: 400 })
+    }
+    const turnstileRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: process.env.TURNSTILE_SECRET_KEY, response: cfToken, remoteip: ip }),
+    })
+    const turnstileData = await turnstileRes.json()
+    if (!turnstileData.success) {
+      return NextResponse.json({ error: 'Security check failed. Please refresh and try again.' }, { status: 403 })
+    }
+
     // Validate input
-    const validationResult = rfqSchema.safeParse(body)
+    const validationResult = rfqSchema.safeParse(formData)
     if (!validationResult.success) {
       return NextResponse.json(
         { error: 'Invalid input', details: validationResult.error.errors },

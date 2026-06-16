@@ -25,12 +25,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: 'RFQ submitted successfully' }, { status: 201 })
     }
 
-    // Verify Cloudflare Turnstile token (production only)
+    // Verify Cloudflare Turnstile token — if present, must be valid; if absent, fall through to other protections
     const { cfToken, website: _hp, ...formData } = body
-    if (process.env.NODE_ENV === 'production') {
-      if (!cfToken) {
-        return NextResponse.json({ error: 'Security check required.' }, { status: 400 })
-      }
+    if (cfToken && process.env.TURNSTILE_SECRET_KEY) {
       const turnstileRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

@@ -3,41 +3,116 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --font-heading: 'Fraunces';
+    --font-body: 'Inter';
+  }
+
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
-    @apply bg-white text-gray-900 antialiased;
+    @apply bg-surface text-ink antialiased font-body;
+    line-height: 1.65;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading text-ink;
+    line-height: 1.15;
   }
 }
 
 @layer components {
+  /* Type scale */
+  .display {
+    @apply font-heading text-5xl md:text-6xl lg:text-7xl tracking-tight;
+    font-optical-sizing: auto;
+    font-weight: 500;
+  }
+
+  .heading-1 {
+    @apply font-heading text-4xl md:text-5xl tracking-tight;
+    font-optical-sizing: auto;
+    font-weight: 500;
+  }
+
+  .heading-2 {
+    @apply font-heading text-3xl md:text-4xl tracking-tight;
+    font-optical-sizing: auto;
+    font-weight: 500;
+  }
+
+  .heading-3 {
+    @apply font-heading text-2xl tracking-tight;
+    font-optical-sizing: auto;
+    font-weight: 500;
+  }
+
+  .body-lg {
+    @apply font-body text-lg text-muted leading-relaxed;
+  }
+
+  .body-sm {
+    @apply font-body text-sm text-muted;
+  }
+
+  /* Buttons */
   .btn-primary {
-    @apply bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+    @apply inline-flex items-center gap-2 bg-accent text-white px-6 py-3 rounded-sm font-body font-medium text-sm
+           hover:bg-accent-hover transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2
+           active:scale-[0.98];
   }
-  
-  .btn-secondary {
-    @apply bg-gray-200 text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2;
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 border border-white/40 text-white px-6 py-3 rounded-sm font-body font-medium text-sm
+           hover:border-white hover:bg-white/10 transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-1
+           active:scale-[0.98];
   }
-  
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border border-accent text-accent px-6 py-3 rounded-sm font-body font-medium text-sm
+           hover:bg-accent hover:text-white transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2
+           active:scale-[0.98];
+  }
+
+  /* Cards */
+  .card-surface {
+    @apply bg-card border border-hairline rounded-md shadow-rest
+           hover:shadow-hover hover:-translate-y-0.5 transition-all duration-200;
+  }
+
+  /* Form inputs */
   .input-field {
-    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+    @apply w-full px-4 py-3 border border-hairline rounded-sm text-ink placeholder-muted/60
+           focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent
+           transition-colors duration-150 font-body text-sm bg-card;
   }
-  
-  .card {
-    @apply bg-white rounded-lg shadow-md p-6;
+
+  /* Section wrapper */
+  .section-pad {
+    @apply py-section px-4 sm:px-6 lg:px-8;
   }
-  
-  /* Logo fallback - hide text if logo image exists */
-  .logo-fallback {
-    display: block;
+
+  .section-pad-sm {
+    @apply py-section-sm px-4 sm:px-6 lg:px-8;
   }
-  
-  /* Hide fallback if logo images are loaded */
-  nav img[src*="ovux-logo"]:not([style*="display: none"]) ~ .logo-fallback,
-  nav img[src*="ovux-icon"]:not([style*="display: none"]) ~ .logo-fallback {
-    display: none;
+
+  /* Container */
+  .container-wide {
+    @apply max-w-7xl mx-auto;
+  }
+
+  /* Eyebrow label */
+  .eyebrow {
+    @apply font-body text-xs font-semibold tracking-widest uppercase text-accent;
+  }
+
+  /* Tabular numbers */
+  .tabular {
+    font-variant-numeric: tabular-nums;
   }
 }
-

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" fill="none">
+  <!-- TODO(afif): replace with official vector logo from Merck brand-asset kit -->
+  <rect width="200" height="60" fill="none"/>
+  <text x="100" y="40" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#14171A" text-anchor="middle" letter-spacing="2">MERCK</text>
+</svg>

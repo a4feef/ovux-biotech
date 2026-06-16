@@ -1,88 +1,138 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { Globe, ShieldCheck, Truck, Users, ArrowRight } from 'lucide-react'
+
+export const metadata: Metadata = {
+  title: 'Services | Ovux Biotech Solutions',
+  description: 'Global sourcing, compliance-aware supply, international logistics, and dedicated account management for regulated laboratory and pharmaceutical procurement.',
+}
+
+const services = [
+  {
+    icon: Globe,
+    title: 'Global Sourcing',
+    desc: 'We leverage our authorized supplier network to source laboratory and clinical equipment across multiple regions, managing quality verification and logistics end to end.',
+    points: [
+      'Authorized supplier network across multiple regions',
+      'Supplier verification and authenticity checks',
+      'Cost-effective procurement for volume or specialist orders',
+      'Supply chain risk awareness',
+    ],
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Compliance-Aware Supply',
+    desc: 'We understand what is at stake in regulated industries. Our sourcing process accounts for applicable GMP, FDA, and ISO requirements before any order is confirmed.',
+    points: [
+      'Regulatory requirement assessment per jurisdiction',
+      'Compliance documentation support',
+      'OEM restriction review before confirmation',
+      'Certification verification and traceability support',
+    ],
+  },
+  {
+    icon: Truck,
+    title: 'Logistics & Shipping',
+    desc: 'International shipping coordination from our Canadian base, including customs documentation and, where required, temperature-controlled freight.',
+    points: [
+      'International shipping coordination',
+      'Customs and import documentation support',
+      'Temperature-controlled shipping where required',
+      'Shipment tracking through to delivery',
+    ],
+  },
+  {
+    icon: Users,
+    title: 'Account Management',
+    desc: 'Direct access to a dedicated representative throughout your procurement cycle. No automated queues for order queries, quote follow-ups, or technical questions.',
+    points: [
+      'Dedicated account representative',
+      'Responsive communication on quotes and orders',
+      'Order status updates through the cycle',
+      'Long-term supply partnership development',
+    ],
+  },
+]
+
 export default function ServicesPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">Our Services</h1>
-        <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-          Comprehensive sourcing and supply chain solutions for pharmaceutical and laboratory equipment.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-        <div className="card">
-          <div className="text-4xl mb-4">🌍</div>
-          <h2 className="text-2xl font-bold mb-4">Global Sourcing</h2>
-          <p className="text-gray-700 mb-4">
-            Leverage our extensive global network of verified suppliers to access a wide range of 
-            pharmaceutical and laboratory equipment. We handle the complexity of international 
-            sourcing, quality verification, and logistics.
-          </p>
-          <ul className="list-disc pl-6 space-y-2 text-gray-600 text-sm">
-            <li>Supplier verification and quality checks</li>
-            <li>Multi-region sourcing capabilities</li>
-            <li>Cost-effective procurement solutions</li>
-            <li>Supply chain risk management</li>
-          </ul>
+    <div>
+      {/* Page header */}
+      <section className="section-pad bg-card border-b border-hairline">
+        <div className="container-wide">
+          <div className="max-w-2xl">
+            <p className="eyebrow mb-4">What We Offer</p>
+            <h1 className="heading-1 text-ink mb-5">
+              Full-cycle procurement support for regulated industries.
+            </h1>
+            <p className="body-lg">
+              From inquiry to delivery, we manage every step of the sourcing process so your team can focus on operations.
+            </p>
+          </div>
         </div>
+      </section>
 
-        <div className="card">
-          <div className="text-4xl mb-4">⚖️</div>
-          <h2 className="text-2xl font-bold mb-4">Regulatory-Aware Supply</h2>
-          <p className="text-gray-700 mb-4">
-            We understand the critical importance of regulatory compliance in pharmaceutical and 
-            laboratory operations. Our approach ensures awareness of applicable regulations and 
-            helps you maintain compliance.
-          </p>
-          <ul className="list-disc pl-6 space-y-2 text-gray-600 text-sm">
-            <li>Regulatory requirement assessment</li>
-            <li>Compliance documentation support</li>
-            <li>OEM restriction awareness</li>
-            <li>Quality and certification verification</li>
-          </ul>
+      {/* Services grid */}
+      <section className="section-pad bg-surface">
+        <div className="container-wide">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {services.map(({ icon: Icon, title, desc, points }) => (
+              <div key={title} className="card-surface rounded-md p-7">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 flex items-center justify-center rounded-sm bg-accent-tint flex-shrink-0">
+                    <Icon size={18} strokeWidth={1.5} className="text-accent" />
+                  </div>
+                  <h2 className="font-body font-semibold text-base text-ink">{title}</h2>
+                </div>
+                <p className="text-sm text-muted leading-relaxed mb-5">{desc}</p>
+                <ul className="space-y-2.5">
+                  {points.map((pt) => (
+                    <li key={pt} className="flex items-start gap-2.5">
+                      <span className="w-1 h-1 rounded-full bg-accent flex-shrink-0 mt-2" />
+                      <span className="text-sm text-muted">{pt}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
+      </section>
 
-        <div className="card">
-          <div className="text-4xl mb-4">📦</div>
-          <h2 className="text-2xl font-bold mb-4">Logistics & Shipping</h2>
-          <p className="text-gray-700 mb-4">
-            Efficient logistics and shipping services to ensure your equipment arrives on time and 
-            in perfect condition, regardless of your location.
-          </p>
-          <ul className="list-disc pl-6 space-y-2 text-gray-600 text-sm">
-            <li>International shipping coordination</li>
-            <li>Customs documentation support</li>
-            <li>Temperature-controlled shipping (when required)</li>
-            <li>Tracking and delivery confirmation</li>
-          </ul>
+      {/* Custom sourcing CTA */}
+      <section className="section-pad bg-ink">
+        <div className="container-wide">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="eyebrow text-accent-tint/70 mb-4">Custom Sourcing</p>
+              <h2 className="heading-2 text-white mb-5">Have a specialist requirement?</h2>
+              <p className="text-white/60 leading-relaxed text-sm mb-8">
+                Hard-to-source reagents, high-volume hospital consumables, or instruments outside our standard catalogue - tell us what you need and we will assess feasibility through our network. No fabricated availability claims: if we cannot source it, we will say so.
+              </p>
+              <Link href="/contact" className="btn-primary">
+                Discuss your requirement
+                <ArrowRight size={14} strokeWidth={1.5} />
+              </Link>
+            </div>
+            <div className="space-y-4">
+              {[
+                { label: 'Inquiry received', sub: 'Quote form or email to our Canadian team' },
+                { label: 'Feasibility assessed', sub: 'We check availability and compliance before responding' },
+                { label: 'Quote issued', sub: 'Detailed quote with lead time and logistics estimate' },
+                { label: 'Order confirmed', sub: 'We coordinate sourcing, compliance, and delivery' },
+              ].map((step, i) => (
+                <div key={step.label} className="flex gap-4 items-start">
+                  <span className="tabular font-body text-xs font-semibold text-accent/50 pt-0.5 w-5 flex-shrink-0">{String(i + 1).padStart(2, '0')}</span>
+                  <div>
+                    <p className="font-body text-sm font-medium text-white">{step.label}</p>
+                    <p className="text-xs text-white/40">{step.sub}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-
-        <div className="card">
-          <div className="text-4xl mb-4">👥</div>
-          <h2 className="text-2xl font-bold mb-4">Account Management</h2>
-          <p className="text-gray-700 mb-4">
-            Dedicated account management to provide personalized service, responsive support, and 
-            ongoing relationship management.
-          </p>
-          <ul className="list-disc pl-6 space-y-2 text-gray-600 text-sm">
-            <li>Dedicated account representative</li>
-            <li>Responsive communication and support</li>
-            <li>Regular order status updates</li>
-            <li>Long-term partnership development</li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="bg-primary-50 rounded-lg p-8 text-center">
-        <h2 className="text-2xl font-bold mb-4">Custom Sourcing Solutions</h2>
-        <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
-          Have specialized equipment needs? Our custom sourcing service can help you find unique 
-          or hard-to-source items. Contact us to discuss your specific requirements.
-        </p>
-        <a href="/contact" className="btn-primary">
-          Request Custom Sourcing
-        </a>
-      </div>
+      </section>
     </div>
   )
 }
-

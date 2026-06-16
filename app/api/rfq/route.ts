@@ -25,19 +25,21 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: 'RFQ submitted successfully' }, { status: 201 })
     }
 
-    // Verify Cloudflare Turnstile token
+    // Verify Cloudflare Turnstile token (production only)
     const { cfToken, website: _hp, ...formData } = body
-    if (!cfToken) {
-      return NextResponse.json({ error: 'Security check required.' }, { status: 400 })
-    }
-    const turnstileRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ secret: process.env.TURNSTILE_SECRET_KEY, response: cfToken, remoteip: ip }),
-    })
-    const turnstileData = await turnstileRes.json()
-    if (!turnstileData.success) {
-      return NextResponse.json({ error: 'Security check failed. Please refresh and try again.' }, { status: 403 })
+    if (process.env.NODE_ENV === 'production') {
+      if (!cfToken) {
+        return NextResponse.json({ error: 'Security check required.' }, { status: 400 })
+      }
+      const turnstileRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ secret: process.env.TURNSTILE_SECRET_KEY, response: cfToken, remoteip: ip }),
+      })
+      const turnstileData = await turnstileRes.json()
+      if (!turnstileData.success) {
+        return NextResponse.json({ error: 'Security check failed. Please refresh and try again.' }, { status: 403 })
+      }
     }
 
     // Validate input

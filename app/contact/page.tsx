@@ -29,11 +29,6 @@ export default function ContactPage() {
   })
 
   const onSubmit = async (data: RFQFormData) => {
-    if (!turnstileToken) {
-      setSubmitStatus({ type: 'error', message: 'Please wait for the security check to complete.' })
-      return
-    }
-
     setIsSubmitting(true)
     setSubmitStatus(null)
 

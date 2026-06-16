@@ -32,7 +32,7 @@ const featuredSpecs = [
   {
     name: 'Surgical Face Mask',
     category: 'Hospital Consumables',
-    imageSrc: '/images/surgical-mask.jpg', // TODO(afif): add /public/images/surgical-mask.jpg
+    imageSrc: '/images/pharma-accessories.jpg', // TODO(afif): replace with /public/images/surgical-mask.jpg
     specs: [
       { label: 'BFE', value: '>= 98%' },
       { label: 'Standard', value: 'EN14683 Type II / ASTM Level 2' },

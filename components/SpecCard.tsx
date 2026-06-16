@@ -27,7 +27,6 @@ export default function SpecCard({ name, category, specs, imageSrc, imageAlt }: 
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 33vw"
-            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
           />
         </div>
       )}

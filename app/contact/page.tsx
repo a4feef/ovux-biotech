@@ -7,7 +7,7 @@ import { rfqSchema, type RFQFormData } from '@/lib/validation'
 import { Mail, MapPin, Clock, ShieldCheck } from 'lucide-react'
 
 const contactDetails = [
-  { icon: Mail, label: 'Email', value: 'mdenam@ovuxbiotech.com', href: 'mailto:mdenam@ovuxbiotech.com' },
+  { icon: Mail, label: 'Email', value: 'connect@ovuxbiotech.com', href: 'mailto:connect@ovuxbiotech.com' },
   { icon: MapPin, label: 'Location', value: 'Canada - serving global markets' },
   { icon: Clock, label: 'Response time', value: 'Within 24 hours on business days' },
 ]
@@ -46,7 +46,7 @@ export default function ContactPage() {
     } catch {
       setSubmitStatus({
         type: 'error',
-        message: 'Submission failed. Please try again or email us directly at mdenam@ovuxbiotech.com.',
+        message: 'Submission failed. Please try again or email us directly at connect@ovuxbiotech.com.',
       })
     } finally {
       setIsSubmitting(false)

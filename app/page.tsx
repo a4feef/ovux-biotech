@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
 import { ArrowRight, FlaskConical, Microscope, Building2, Dna, Leaf, ShieldCheck } from 'lucide-react'
 import TrustBar from '@/components/TrustBar'
-import BrandsStrip from '@/components/BrandsStrip'
 import ProcessFlow from '@/components/ProcessFlow'
 import StatsBand from '@/components/StatsBand'
 import SpecCard from '@/components/SpecCard'
@@ -17,11 +16,12 @@ const industries = [
 ]
 
 // TODO(afif): replace placeholder spec data with verified product specs
+// TODO(afif): drop real product photos into /public/images/nitrile-gloves.jpg and /public/images/surgical-mask.jpg
 const featuredSpecs = [
   {
     name: 'Nitrile Exam Gloves',
     category: 'Hospital Consumables',
-    imageSrc: '/images/pharma-accessories.jpg',
+    imageSrc: '/images/nitrile-gloves.jpg', // TODO(afif): add /public/images/nitrile-gloves.jpg
     specs: [
       { label: 'Material', value: 'Nitrile' },
       { label: 'Thickness', value: '0.10 mm (palm)' },
@@ -32,7 +32,7 @@ const featuredSpecs = [
   {
     name: 'Surgical Face Mask',
     category: 'Hospital Consumables',
-    imageSrc: '/images/pharma-accessories.jpg',
+    imageSrc: '/images/surgical-mask.jpg', // TODO(afif): add /public/images/surgical-mask.jpg
     specs: [
       { label: 'BFE', value: '>= 98%' },
       { label: 'Standard', value: 'EN14683 Type II / ASTM Level 2' },
@@ -207,8 +207,24 @@ export default async function HomePage() {
       {/* Stats band */}
       <StatsBand />
 
-      {/* Brands strip */}
-      <BrandsStrip />
+      {/* Brands teaser */}
+      <section className="section-pad-sm bg-surface border-y border-hairline">
+        <div className="container-wide flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <p className="eyebrow mb-2">Authorized Distribution</p>
+            <h2 className="font-heading text-2xl text-ink font-medium">
+              60+ brands. One trusted source.
+            </h2>
+            <p className="text-sm text-muted mt-2">
+              Thermo Fisher, Waters, Shimadzu, Agilent, Phenomenex, Merck, Bio-Rad, Tosoh, and more.
+            </p>
+          </div>
+          <Link href="/brands" className="btn-outline flex-shrink-0">
+            View all brands
+            <ArrowRight size={14} strokeWidth={1.5} />
+          </Link>
+        </div>
+      </section>
 
       {/* Compliance section */}
       <section className="section-pad bg-card border-t border-hairline">

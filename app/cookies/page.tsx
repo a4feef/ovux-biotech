@@ -82,7 +82,7 @@ export default function CookiesPage() {
           If you have any questions about our use of cookies, please contact us at:
         </p>
         <p className="text-gray-700">
-          <strong>Email:</strong> info@ovuxbiotech.com<br />
+          <strong>Email:</strong> connect@ovuxbiotech.com<br />
           <strong>Address:</strong> Canada
         </p>
       </div>

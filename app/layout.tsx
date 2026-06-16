@@ -53,7 +53,7 @@ const jsonLd = {
       logo: 'https://ovuxbiotech.com/logo/ovux-logo.png',
       contactPoint: {
         '@type': 'ContactPoint',
-        email: 'mdenam@ovuxbiotech.com',
+        email: 'connect@ovuxbiotech.com',
         contactType: 'customer service',
         availableLanguage: 'English',
       },
@@ -71,7 +71,7 @@ const jsonLd = {
         '@type': 'PostalAddress',
         addressCountry: 'CA',
       },
-      email: 'mdenam@ovuxbiotech.com',
+      email: 'connect@ovuxbiotech.com',
       url: 'https://ovuxbiotech.com',
     },
   ],

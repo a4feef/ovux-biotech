@@ -20,8 +20,13 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json()
 
+    // Honeypot check — bots fill this field, real users never see it
+    if (body.website) {
+      return NextResponse.json({ message: 'RFQ submitted successfully' }, { status: 201 })
+    }
+
     // Verify Cloudflare Turnstile token
-    const { cfToken, ...formData } = body
+    const { cfToken, website: _hp, ...formData } = body
     if (!cfToken) {
       return NextResponse.json({ error: 'Security check required.' }, { status: 400 })
     }

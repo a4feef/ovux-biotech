@@ -236,6 +236,11 @@ export default function ContactPage() {
                     />
                   </div>
 
+                  {/* Honeypot — hidden from real users, bots fill it automatically */}
+                  <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}>
+                    <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+                  </div>
+
                   <div className="pt-2">
                     <Turnstile
                       ref={turnstileRef}
@@ -247,7 +252,7 @@ export default function ContactPage() {
                     />
                     <button
                       type="submit"
-                      disabled={isSubmitting || !turnstileToken}
+                      disabled={isSubmitting}
                       className="btn-primary w-full justify-center disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? 'Submitting...' : 'Submit Quote Request'}
